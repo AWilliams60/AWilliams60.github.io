@@ -39,25 +39,30 @@ $(function () {
     //////////ONLY CHANGE BELOW THIS POINT///////////
     /////////////////////////////////////////////////
 
-    createPlatform(500, 300, 200 , 20); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
-
-    createPlatform(500, 500, 400, 20); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
+    createPlatform(50, 655, 400, 20); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
     
-    createPlatform(500, 300, 200, 20); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
+    createPlatform(10, 520, 50, 10); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
 
-    createPlatform(500, 300, 200, 20); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
+    createPlatform(200, 400, 50, 20); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
 
-    createPlatform(500, 300, 200, 20); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
+    createPlatform(500, 350, 50, 20); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
 
+    createPlatform(800, 350, 50, 20); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
+
+    createPlatform(1000, 350, 90, 20); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
+
+    createPlatform(1200, 250, 90, 50); // short but wide platform located 500 pixels from the left of the screen and 300 pixels from the top of the screen
+    
 
     createCollectable("steve", 500, 300, 20, 0.5); // creates a "steve" collectible at the coordinates (500, 300), falling with a high gravity of 20, and bouncing with 50% bounce
-    createCollectable("grace", 500, 300); // creates a "grace" collectible at the coordinates (500, 300), falling with default gravity and bouncing with default bounce %
-
-
-
+    createCollectable("grace", 800, 300); // creates a "grace" collectible at the coordinates (500, 300), falling with default gravity and bouncing with default bounce %
+    createCollectable("steve", 1350, 600, 20, 0.5); // creates a "steve" collectible at the coordinates (500, 300), falling with a high gravity of 20, and bouncing with 50% bounce
+    createCollectable("grace", 1200, 200); // creates a "grace" collectible at the coordinates (500, 300), falling with default gravity and bouncing with default bounce %
 
     createCannon("left", 600, 1000); // cannon on left wall, 600px down, shooting once per second
-
+    createCannon("left", 650, 1000); // cannon on left wall, 600px down, shooting once per second
+    createCannon("left", 300, 1000); // cannon on left wall, 600px down, shooting once per second
+    createCannon("left", 250, 1000); // cannon on left wall, 600px down, shooting once per second
 
 
 
