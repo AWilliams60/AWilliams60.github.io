@@ -12,12 +12,26 @@ function runProgram(){
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   
   // Game Item Objects
+  var KEY = {
+    ENTER: 13,
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40
+  };
 
+  var walker = {
+    positionX: 0,
+    positionY: 0,
+    speedX: 0,
+    speedY: 0
+  }
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
-  $(document).on('eventType', handleEvent);                           // change 'eventType' to the type of event you want to handle
-
+  $(document).on('keydown', handleKeyDown);          
+  
+ 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -27,21 +41,49 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    
+    respositionGameItem();
+    redrawGameItem();
 
   }
   
   /* 
   Called in response to events.
   */
-  function handleEvent(event) {
+  function handleKeyDown(event) {
+    if (event.which === KEY.ENTER) {
+      console.log("enter key pressed");
+
+    } else if (event.which === KEY.LEFT) {
+       console.log("left key pressed");
+
+    } else if (event.which === KEY.UP) {
+      console.log("up key pressed");
+
+    } else if (event.which === KEY.RIGHT) {
+      console.log("right key pressed");
+
+    } else if (event.which === KEY.DOWN) {
+       console.log("down key pressed");
+    }
 
   }
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+  function respositionGameItem() {
+    if (event.which === KEY.RIGHT) {
+      positionX += speedX
+      positionY += speedY
+    }
+  }
 
+  function redrawGameItem() {
+    $("#box").css("left", positionX);
+    $("#box").css("right", positionX);
+    $("#box").css("up", positionY);
+    $("#box").css("down", positionY);
+  }
   
   function endGame() {
     // stop the interval timer
