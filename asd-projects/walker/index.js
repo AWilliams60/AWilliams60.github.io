@@ -3,6 +3,12 @@
 $(document).ready(runProgram); // wait for the HTML / CSS elements of the page to fully load, then execute runProgram()
   
 function runProgram(){
+  var KEY = {
+    "Left": 37,
+    "Right": 39,
+    "Up": 38,
+    "Down": 40
+  }
   ////////////////////////////////////////////////////////////////////////////////
   //////////////////////////// SETUP /////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -12,77 +18,87 @@ function runProgram(){
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   
   // Game Item Objects
-  var KEY = {
-    ENTER: 13,
-    LEFT: 37,
-    UP: 38,
-    RIGHT: 39,
-    DOWN: 40
-  };
-
-  var walker = {
-    positionX: 0,
-    positionY: 0,
-    speedX: 0,
-    speedY: 0
+  var walker = { 
+    positionX: 200,
+    positionY: 200,
+    speedX:0,
+    speedY: 0,
   }
+
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
-  $(document).on('keydown', handleKeyDown);          
-  
- 
+  ($(document).on('keydown', handleKeyDown))
+  ($(document).on('keyup', handleKeyup))
+                          // change 'eventType' to the type of event you want to handle
+
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+  function handleKeyDown(event){
+     if (event.which === KEY.Left){
+      walker.speedX = -5
+    } else if (event.which === KEY.Right){
+      walker.speedX = 5
+    } else if (event.which === KEY.Down){
+      walker.speedY = 5
+    } else if (event.which === KEY.Up){
+      walker.speedY = -5
+    }
+  }
 
   /* 
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    respositionGameItem();
-    redrawGameItem();
-
+    repositionGameItem()
+    wallCollision()
+    redrawGameItem()
   }
   
   /* 
   Called in response to events.
   */
-  function handleKeyDown(event) {
-    if (event.which === KEY.ENTER) {
-      console.log("enter key pressed");
+  function handleKeyup(event){
+    if (event.which === KEY.Left){
+      walker.speedX = 0
+    } else if (event.which === KEY.Right){
+      walker.speedX = 0
+    } else if (event.which === KEY.Down){
+      walker.speedY = 0
+    } else if (event.which === KEY.Up){
+      walker.speedY = 0
 
-    } else if (event.which === KEY.LEFT) {
-       console.log("left key pressed");
-
-    } else if (event.which === KEY.UP) {
-      console.log("up key pressed");
-
-    } else if (event.which === KEY.RIGHT) {
-      console.log("right key pressed");
-
-    } else if (event.which === KEY.DOWN) {
-       console.log("down key pressed");
-    }
-
+  }
   }
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
-  function respositionGameItem() {
-    if (event.which === KEY.RIGHT) {
-      positionX += speedX
-      positionY += speedY
-    }
+  function repositionGameItem(){
+    walker.positionX = walker.positionX + walker.speedX
+    walker.positionY = walker.positionY + walker.speedY
   }
+  function redrawGameItem(){
+    $("#walker").css("left", walker.positionX);
+    $("#walker").css("top", walker.positionY);
 
-  function redrawGameItem() {
-    $("#box").css("left", positionX);
-    $("#box").css("right", positionX);
-    $("#box").css("up", positionY);
-    $("#box").css("down", positionY);
+  }
+boardWandH = $("#board").width()
+function wallCollision(){
+  if (walker.positionX === 0) {
+    walker.positionX -= walker.speedX
+    }
+  if (walker.positionY === 0) {
+    walker.positionY -= walker.speedY
+    }
+  if (walker.positionX === 390 ) { 
+    walker.positionX -= walker.speedX
+    }
+  if (walker.positionY === 390) { 
+    walker.positionY -= walker.speedY
+    }
   }
   
   function endGame() {
